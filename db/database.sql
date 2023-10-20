@@ -9,13 +9,14 @@ CREATE TABLE
     );
 
 CREATE TABLE 
-    weatherdetection (
+     weatherdetection(
         id SERIAL Primary Key,
-        weather_station_id REAL,
+        weather_station_id INTEGER ,
         detection_type SMALLINT,
         value REAL,
-        date REAL,
+        date DATE,
         CONSTRAINT fk_weatherstation
-        FOREIGN KEY(weather_station_id) 
-        REFERENCES weatherstation(id)
-    );
+      FOREIGN KEY(weather_station_id) 
+	  REFERENCES weatherstation(id)
+
+     );
