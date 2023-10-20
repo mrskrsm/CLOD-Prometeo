@@ -5,5 +5,8 @@ namespace ITS.Prometeo.ApplicationCore.Persistence;
 public interface IWeatherDetectionRepository
 {
     Task InsertAsync(WeatherDetection detection);
+    Task<IEnumerable<WeatherDetection>> GetListAsync();
+    Task<WeatherDetection?> GetByIdAsync(long id);
+
 }
 }

@@ -16,6 +16,40 @@ internal class WeatherDetectionRepository : IWeatherDetectionRepository
     {
         _connectionString = configuration.GetConnectionString("db");
     }
+
+    public async Task<WeatherDetection?> GetByIdAsync(long id)
+    {
+        const string query = """
+                SELECT 
+                    id                 as Id,
+                    weather_station_id as WeatherStationId,
+                    detection_type     as Type,
+                    value              as Value,
+                    date               as Date
+                FROM weatherdetection
+                WHERE
+                    id = @id
+                """;
+        using var connection = new NpgsqlConnection(_connectionString);
+        return await connection.QueryFirstOrDefaultAsync<WeatherDetection>(query, new { id });
+    }
+
+    public async Task<IEnumerable<WeatherDetection>> GetListAsync()
+    {
+        const string query = """
+                SELECT 
+                    id                 as Id,
+                    weather_station_id as WeatherStationId,
+                    detection_type     as Type,
+                    value              as Value,
+                    date               as Date
+                FROM weatherdetection
+                """;
+        using var connection = new NpgsqlConnection(_connectionString);
+        return await connection.QueryAsync<WeatherDetection>(query);
+    
+}
+
     public async Task InsertAsync(WeatherDetection detection)
     {
         const string query = """
