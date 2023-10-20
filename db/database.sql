@@ -7,3 +7,15 @@ CREATE TABLE
         latitude REAL,
         station_type VARCHAR(100)
     );
+
+CREATE TABLE 
+    weatherdetection (
+        id SERIAL Primary Key,
+        weather_station_id REAL,
+        detection_type SMALLINT,
+        value REAL,
+        date REAL,
+        CONSTRAINT fk_weatherstation
+        FOREIGN KEY(weather_station_id) 
+        REFERENCES weatherstation(id)
+    );
